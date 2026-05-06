@@ -11,16 +11,20 @@ import lib/contact
 fun add-id(id-str)
     add-attr("id", id-str)
 
-fun some-stylesheet ()
+fun main-style ()
     stylesheet
-        add-rule
-            add-selector(".red")
-            add-property("color","red")
-        add-rule
-            add-selector(".blue")
-            add-property("color","blue")
 
-fun main-p () : _ component
+        add-rule
+            add-selector(":root")
+            add-property("--links", "#453A62")
+
+        add-rule
+            add-media-query("(prefers-color-scheme: dark)")
+                add-rule
+                    add-selector(":root")
+                    add-property("--links", "#7860b6")
+
+fun main-page () : _ component
     html
         add-attr("lang", "id")
         head
@@ -74,12 +78,12 @@ fun add-css-header (css-str)
 
 fun main ()
     "=== Generating HTML ===".println
-    val html-str = main-p().show.add-html-header
+    val html-str = main-page().show.add-html-header
     html-str.println
     "index.html".path.write-text-file(html-str)
 
     println("")
     "=== Generating CSS ===".println
-    val css-str = some-stylesheet().show.add-css-header
+    val css-str = main-style().show.add-css-header
     css-str.println
     "style.css".path.write-text-file(css-str)
