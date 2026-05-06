@@ -12,108 +12,113 @@ fun add-id(id-str)
     add-attr("id", id-str)
 
 fun meta-name(name-str, content-str)
-    component("meta")
-        add-attr("content", content-str)
-        add-attr("name", name-str)
+    with component("meta")
+    add-attr("content", content-str)
+    add-attr("name", name-str)
 
 fun meta-property(property-str, content-str)
-    component("meta")
-        add-attr("content", content-str)
-        add-attr("property", property-str)
+    with component("meta")
+    add-attr("content", content-str)
+    add-attr("property", property-str)
 
 fun main-style ()
-    stylesheet
+    with stylesheet
 
-        add-rule
-            add-selector(":root")
-            add-property("--links", "#453A62")
+    add-rule
+        add-selector(":root")
+        add-property("--links", "#453A62")
 
-        add-rule
-            add-media-query("(prefers-color-scheme: dark)")
-                add-rule
-                    add-selector(":root")
-                    add-property("--links", "#26c774")
+    add-rule
+        add-media-query("(prefers-color-scheme: dark)")
+            add-rule
+                add-selector(":root")
+                add-property("--links", "#26c774")
 
 fun main-page () : _ component
-    html
-        add-attr("lang", "en")
-        head
-            meta-charset()
-            meta-viewport()
-            meta-name("description", "LitFill's Portfolio - Projects and Contacts")
-            meta-name("author", "LitFill")
-            meta-name("theme-color", "#453A62")
-            meta-property("og:title", "LitFill Portfolio")
-            meta-property("og:description", "Some of my projects and how to find me.")
-            meta-property("og:type", "website")
+    with html
+    add-attr("lang", "en")
 
-            title
-                "LitFill | Rozy".text
+    head
+        meta-charset()
+        meta-viewport()
+        meta-name("description", "LitFill's Portfolio - Projects and Contacts")
+        meta-name("author", "LitFill")
+        meta-name("theme-color", "#453A62")
+        meta-property("og:title", "LitFill Portfolio")
+        meta-property("og:description", "Some of my projects and how to find me.")
+        meta-property("og:type", "website")
 
-            stylesheet("https://cdn.jsdelivr.net/npm/water.css@2/out/water.css")
-            stylesheet("./style.css")
-        body
-            main
-                add-attr("role", "main")
-                h1
-                    "LitFill".text
-                project-section ()
-                contacts-section ()
-                br {}
-                footer ()
+        title
+            "LitFill | Rozy".text
+
+        stylesheet("https://cdn.jsdelivr.net/npm/water.css@2/out/water.css")
+        stylesheet("./style.css")
+
+    body
+        main
+            add-attr("role", "main")
+            h1
+                "LitFill".text
+            project-section ()
+            contacts-section ()
+            br {}
+            footer ()
 
 fun project-section ()
-    section
-        h2
-            "Some of my projects:".text
-        ul
-            with pr <- projects.foreach
-            li
-                a(pr.link.show)
-                    add-attr("aria-label", "View " ++ pr.name ++ " on GitHub")
-                    code
-                        pr.name.text
-                p
-                    pr.desc.text
+    with section
+    h2
+        "Some of my projects:".text
+    ul
+        with pr <- projects.foreach
+        li
+            a(pr.link.show)
+                add-attr("aria-label", "View " ++ pr.name ++ " on GitHub")
+                code
+                    pr.name.text
+            p
+                pr.desc.text
 
 fun contacts-section ()
-    section
-        h2
-            "You can find me at:".text
-        table
-            thead
-                tr
-                    th
-                        "Place".text
-                    th
-                        "Name".text
-            tbody
-                with ct <- contacts.foreach
-                tr
-                    td
-                        ct.provider.text
-                    td
-                        "as ".text
-                        a(ct.link)
-                            add-attr("aria-label", "Visit " ++ ct.provider ++ " profile")
-                            code
-                                ct.displayname.text
+    with section
+    h2
+        "You can find me at:".text
+    with table
+
+    thead
+        tr
+            th
+                "Place".text
+            th
+                "Name".text
+
+    tbody
+        with ct <- contacts.foreach
+        tr
+            td
+                ct.provider.text
+            td
+                "as ".text
+                a(ct.link)
+                    add-attr("aria-label", "Visit " ++ ct.provider ++ " profile")
+                    code
+                        ct.displayname.text
 
 fun footer ()
-    footer
-        add-attr("role", "contentinfo")
-        add-attr("style", "margin-top: 2rem;")
-        p
-            "This page is made using ".text
-            a("https://github.com/koka-community/html.git")
-                add-attr("aria-label", "Koka HTML DSL Repository")
-                code
-                    "koka-community/html".text
-            " DSL. You can take a peek ".text
-            a("https://github.com/LitFill/portopage.git")
-                add-attr("aria-label", "Source code of this portfolio")
-                "here".text
-            ".".text
+    with footer
+    add-attr("role", "contentinfo")
+    add-attr("style", "margin-top: 2rem;")
+
+    p
+        "This page is made using ".text
+        a("https://github.com/koka-community/html.git")
+            add-attr("aria-label", "Koka HTML DSL Repository")
+            code
+                "koka-community/html".text
+        " DSL. You can take a peek ".text
+        a("https://github.com/LitFill/portopage.git")
+            add-attr("aria-label", "Source code of this portfolio")
+            "here".text
+        ".".text
 
 fun add-html-header (html-str)
     val header-str = "<!-- Generated by main.kk. Do not modify. -->\n<!DOCTYPE html>\n"
