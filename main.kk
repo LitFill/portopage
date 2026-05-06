@@ -67,14 +67,14 @@ fun project-section ()
         h2
             "Some of my projects:".text
         ul
-            projects.foreach fn(pr)
-                li
-                    a(pr.link.show)
-                        add-attr("aria-label", "View " ++ pr.name ++ " on GitHub")
-                        code
-                            pr.name.text
-                    p
-                        pr.desc.text
+            with pr <- projects.foreach
+            li
+                a(pr.link.show)
+                    add-attr("aria-label", "View " ++ pr.name ++ " on GitHub")
+                    code
+                        pr.name.text
+                p
+                    pr.desc.text
 
 fun contacts-section ()
     section
