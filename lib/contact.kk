@@ -9,7 +9,8 @@ pub inline fun contact/show(c)
     c.provider ++ " as " ++ c.displayname ++ "["++c.link++"]"
 
 pub val contacts = [
-    Contact("GitHub", "LitFill", "https://github.com/LitFill"),
-    Contact("X", "LitFill", "https://x.com/razzy_ar"),
-    Contact("Discord", "LitFill", "https://discord.gg/3ME4r6DB"),
+    Contact("GitHub", "@LitFill", "https://github.com/LitFill"),
+    Contact("X", "@LitFill", "https://x.com/razzy_ar"),
+    Contact("Discord", "@LitFill", "https://discord.gg/3ME4r6DB"),
+    Contact("WhatsApp", "Rozy", "https://wa.me/6285111304115"),
 ]

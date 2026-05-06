@@ -10,7 +10,7 @@ pub type project-link
     Custom(raw-link : string)
 
 pub fun project-link/show(pr) match pr
-    GitHub(repo) -> "https://github.com/" ++ repo ++ ".git"
+    GitHub(repo) -> "https://github.com/" ++ repo
     Custom(link) -> link
 
 pub val projects = [
@@ -23,5 +23,8 @@ pub val projects = [
     Project("gyrum",
             "Mercury language project scaffolder",
             "LitFill/gyrum".GitHub),
+    Project("simp-json",
+            "Simple JSON parser from scratch",
+            "LitFill/simp-json".GitHub),
 ]
 
