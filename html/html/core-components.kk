@@ -8,9 +8,12 @@
 
 import html-builder
 import style-builder
-
+import escape
 
 pub inline fun text(s: string): <component-builder|e> ()
+  register-child(InnerHtml(html-escape(s)))
+
+pub inline fun raw-html(s: string): <component-builder|e> ()
   register-child(InnerHtml(s))
 
 pub inline fun classcomponent(name: string, build-tree: () -> <component-builder|e> (), classes: list<string> = []): <component-builder|e> ()

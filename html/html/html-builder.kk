@@ -111,19 +111,27 @@ fun show-bool-attrs(attrs: list<string>): string
     [] -> ""
     _ -> " " ++ attrs.join(" ")
 
+val void-elements = ["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]
+
 fun component/show(c: component, indent: int = 0): string
   match c
-    Component(tag, SelfClosing, classes, attrs, battrs) ->
-      "<" ++ tag ++ show-classes(classes) ++ show-attrs(attrs) ++ show-bool-attrs(battrs) ++ " />"
-    Component(tag, Components(children), classes, attrs, battrs) ->
-      val child-indent = indent + 2
-      val child-indentation = indentation(child-indent)
-      "<" ++ tag ++ show-classes(classes) ++ show-attrs(attrs) ++ show-bool-attrs(battrs) ++ ">\n"
-        ++ child-indentation ++
-          children.map(
-            fn(child) child.pretend-decreasing.show(indent = child-indent)
-          ).join("\n" ++ child-indentation) ++ "\n" ++
-      indent.indentation ++ "</" ++ tag ++ ">"
+    Component(tag, children, classes, attrs, battrs) ->
+      val is-void = void-elements.any(fn(e) e == tag)
+      if is-void then
+        "<" ++ tag ++ show-classes(classes) ++ show-attrs(attrs) ++ show-bool-attrs(battrs) ++ ">"
+      else
+        match children
+          SelfClosing ->
+             "<" ++ tag ++ show-classes(classes) ++ show-attrs(attrs) ++ show-bool-attrs(battrs) ++ "></" ++ tag ++ ">"
+          Components(children-list) ->
+             val child-indent = indent + 2
+             val child-indentation = indentation(child-indent)
+             "<" ++ tag ++ show-classes(classes) ++ show-attrs(attrs) ++ show-bool-attrs(battrs) ++ ">\n"
+               ++ child-indentation ++
+                 children-list.map(
+                   fn(child) child.pretend-decreasing.show(indent = child-indent)
+                 ).join("\n" ++ child-indentation) ++ "\n" ++
+             indent.indentation ++ "</" ++ tag ++ ">"
     InnerHtml(inner) -> inner
 
 fun indentation(indent: int): string

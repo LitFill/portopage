@@ -6,9 +6,15 @@ struct style-rule
 struct style-sheet
   rules: list<style-rule>
 
+fun validate(s: string): string
+  s.replace-all(";", "")
+   .replace-all("{", "")
+   .replace-all("}", "")
+   .replace-all(":", "")
+
 fun rule/show(r: style-rule): string
   r.selector.join(", ") ++ " {\n" ++ r.properties.map(fn(p)
-    "  \"" ++ p.fst ++ "\": \"" ++ p.snd ++ "\";\n"
+    "  " ++ validate(p.fst) ++ ": " ++ validate(p.snd) ++ ";\n"
   ).join("") ++ "}\n"
 
 fun stylesheet/show(s: style-sheet): string
