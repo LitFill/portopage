@@ -41,6 +41,16 @@ fun main-page () : _ component
                     "LitFill".text
                 project-section ()
                 contacts-section ()
+                footer
+                    p
+                        "This page is made using ".text
+                        a("https://github.com/koka-community/html.git")
+                            code
+                                "koka-community/html".text
+                        " DSL. You can take a peek ".text
+                        a("https://github.com/LitFill/portopage.git")
+                            "here".text
+                        ".".text
 
 fun project-section ()
     section
