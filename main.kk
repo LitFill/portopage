@@ -5,6 +5,9 @@ import std/os/file
 import html/html/html
 import html/html/style-builder
 
+import lib/project
+import lib/contact
+
 fun add-id(id-str)
     add-attr("id", id-str)
 
@@ -33,31 +36,7 @@ fun main-p () : _ component
                 h1
                     "LitFill".text
                 project-section ()
-
-struct project
-    name : string
-    desc : string
-    link : project-link
-
-type project-link
-    GitHub(repo : string)
-    Custom(raw-link : string)
-
-fun project-link/show(pr) match pr
-    GitHub(repo) -> "https://github.com/" ++ repo ++ ".git"
-    Custom(link) -> link
-
-val projects = [
-    Project("rayt",
-            "Ray tracer in Haskell",
-            "LitFill/rayt".GitHub),
-    Project("fractran-koka",
-            "Fractan language implemented in Koka",
-            "LitFill/fractran-koka".GitHub),
-    Project("gyrum",
-            "Mercury language project scaffolder",
-            "LitFill/gyrum".GitHub),
-]
+                contacts-section ()
 
 fun project-section ()
     section
@@ -71,6 +50,19 @@ fun project-section ()
                             pr.name.text
                     p
                         pr.desc.text
+
+fun contacts-section ()
+    section
+        p
+            "You can find me at:".text
+        ul
+            contacts.foreach fn(c)
+                li
+                    span
+                        c.provider.text
+                    "as".text
+                    a(c.link)
+                        c.displayname.text
 
 fun main ()
     "=== Generating HTML ===".println
