@@ -6,7 +6,7 @@ pub struct contact
     link : string
 
 pub inline fun contact/show(c)
-    c.provider ++ " as " ++ c.displayname ++ "["++c.link++"]"
+    c.provider ++ " as " ++ c.displayname ++ "[" ++ c.link ++ "]"
 
 pub val contacts = [
     Contact("GitHub", "@LitFill", "https://github.com/LitFill"),

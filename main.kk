@@ -26,7 +26,7 @@ fun main-style ()
 
     add-rule
         add-selector(":root")
-        add-property("--links", "#453A62")
+        add-property("--links", "#254061")
 
     add-rule
         add-media-query("(prefers-color-scheme: dark)")
@@ -43,7 +43,7 @@ fun main-page () : _ component
         meta-viewport()
         meta-name("description", "LitFill's Portfolio - Projects and Contacts")
         meta-name("author", "LitFill")
-        meta-name("theme-color", "#453A62")
+        meta-name("theme-color", "#254061")
         meta-property("og:title", "LitFill Portfolio")
         meta-property("og:description", "Some of my projects and how to find me.")
         meta-property("og:type", "website")

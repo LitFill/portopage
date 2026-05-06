@@ -7,7 +7,7 @@ pub struct project
 
 pub type project-link
     GitHub(repo : string)
-    Custom(raw-link : string)
+    Custom(link : string)
 
 pub fun project-link/show(pr) match pr
     GitHub(repo) -> "https://github.com/" ++ repo
