@@ -54,6 +54,20 @@ fun main-page () : _ component
         stylesheet("https://cdn.jsdelivr.net/npm/water.css@2/out/water.css")
         stylesheet("./style.css")
 
+        link("icon", "/static/favicon.ico")
+            add-attr("type", "image/x-icon")
+            add-attr("sizes", "48x48")
+        link("icon", "/static/favicon.svg")
+            add-attr("type", "image/svg+xml")
+            add-attr("sizes", "any")
+        link("icon", "/static/favicon-96x96.png")
+            add-attr("type", "image/png")
+            add-attr("sizes", "96x96")
+        link("apple-touch-icon", "/static/apple-touch-icon.png")
+            add-attr("sizes", "180x180")
+        link("manifest", "/site.webmanifest")
+            add-attr("crossorigin", "use-credentials")
+
     body
         main
             add-attr("role", "main")
