@@ -1,0 +1,23 @@
+#!/bin/sh
+# Pre-commit hook: regenerate index.html and style.css from main.kk
+# Ensures generated output never drifts from source.
+
+set -e
+
+echo "[ INFO    ] Regenerating from 'main.kk' ..."
+
+if ! command -v koka >/dev/null 2>&1; then
+    echo "[ ERROR   ] koka not found in PATH. Skipping regeneration."
+    exit 1
+fi
+
+# Regenerate index.html and style.css
+koka -e main.kk 2>&1 || {
+    echo "[ ERROR   ] 'koka -e main.kk' failed. Fix compilation errors before committing."
+    exit 1
+}
+
+# Stage regenerated output files (in case they changed)
+git add index.html style.css 2>/dev/null || true
+
+echo "[ SUCCESS ] Regeneration complete. index.html and style.css staged."
