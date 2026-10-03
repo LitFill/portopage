@@ -112,7 +112,7 @@ fun contacts-section ()
             td
                 "as ".text
                 a(ct.link)
-                    add-attr("aria-label", "Visit " ++ ct.provider ++ " profile")
+                    add-attr("aria-label", "Visit " ++ ct.provider ++ " page")
                     with code
                     ct.displayname.text
 

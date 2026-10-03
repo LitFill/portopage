@@ -10,6 +10,7 @@ pub inline fun contact/show(c)
 
 pub val contacts = [
     Contact("GitHub", "@LitFill", "https://github.com/LitFill"),
+    Contact("Blog", "LitFill's blog", "https://blog.rozy.my.id"),
     Contact("X", "@LitFill", "https://x.com/razzy_ar"),
     Contact("Discord", "@LitFill", "https://discord.gg/3ME4r6DB"),
     Contact("WhatsApp", "Rozy", "https://wa.me/6285111304115"),

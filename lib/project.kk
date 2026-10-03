@@ -14,6 +14,18 @@ pub fun project-link/show(pr) match pr
     Custom(link) -> link
 
 pub val projects = [
+    Project("koki",
+            "Koka project scaffolder",
+            "LitFill/koki".GitHub),
+    Project("nel-kk",
+            "Non-empty list data structure for Koka",
+            "LitFill/nel-kk".GitHub),
+    Project("derive",
+            "CLI for auto deriving Koka functions like show and eq",
+            "LitFill/derive".GitHub),
+    Project("solat-tracker",
+            "Prayer tracker built with Kotlin Compose",
+            "LitFill/solat-tracker".GitHub),
     Project("rayt",
             "Ray tracer in Haskell",
             "LitFill/rayt".GitHub),
